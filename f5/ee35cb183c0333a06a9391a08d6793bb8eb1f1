@@ -1,0 +1,16 @@
+src/main/java/com/meli/marketplace/models/Producto.java
+  h_0e4c4fdeb84025 25
+src/main/java/com/meli/marketplace/models/Categoria.java
+  h_0e4c4fdeb84025 25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "f5ee35cb183c0333a06a9391a08d6793bb8eb1f1",
+  "prompts": {},
+  "humans": {
+    "h_0e4c4fdeb84025": {
+      "author": "shadowsouls444 <angel.acuna.meza@gmail.com>"
+    }
+  }
+}

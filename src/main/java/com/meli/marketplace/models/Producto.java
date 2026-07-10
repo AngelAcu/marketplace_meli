@@ -22,6 +22,7 @@ public class Producto {
     private double precio;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
 }

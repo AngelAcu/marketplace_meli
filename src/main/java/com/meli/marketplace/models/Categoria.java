@@ -22,7 +22,7 @@ public class Categoria {
     private String nombre;
     private String descripcion;
 
-    @OneToMany
+    @OneToMany(mappedBy = "categoria")
     private List<Producto> productos;
 
 }

@@ -1,0 +1,34 @@
+src/main/java/com/meli/marketplace/exceptions/ErrorResponse.java
+  h_0e4c4fdeb84025 10
+src/main/java/com/meli/marketplace/repositories/ProductoRepository.java
+  h_0e4c4fdeb84025 11
+src/main/java/com/meli/marketplace/services/ProductoService.java
+  h_0e4c4fdeb84025 15
+src/main/java/com/meli/marketplace/exceptions/ProductoNotFoundException.java
+  h_0e4c4fdeb84025 3
+src/main/java/com/meli/marketplace/models/Producto.java
+  h_0e4c4fdeb84025 3-12,17
+src/main/java/com/meli/marketplace/exceptions/GlobalExceptionHandler.java
+  h_0e4c4fdeb84025 11
+src/main/java/com/meli/marketplace/models/Categoria.java
+  h_0e4c4fdeb84025 3-10,17
+src/main/resources/application.properties
+  h_0e4c4fdeb84025 3
+src/main/java/com/meli/marketplace/dto/ProductoDTO.java
+  h_0e4c4fdeb84025 8
+src/main/java/com/meli/marketplace/controllers/ProductoController.java
+  h_0e4c4fdeb84025 14
+src/main/java/com/meli/marketplace/exceptions/ProductoConflictException.java
+  h_0e4c4fdeb84025 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "753a9f4e30a502a01b58b17e87b19a2302cc7323",
+  "prompts": {},
+  "humans": {
+    "h_0e4c4fdeb84025": {
+      "author": "shadowsouls444 <angel.acuna.meza@gmail.com>"
+    }
+  }
+}

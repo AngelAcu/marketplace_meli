@@ -1,0 +1,12 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "c536077f472ffede43a4fc29fa67f6d1627c60ac",
+  "prompts": {},
+  "humans": {
+    "h_0e4c4fdeb84025": {
+      "author": "shadowsouls444 <angel.acuna.meza@gmail.com>"
+    }
+  }
+}

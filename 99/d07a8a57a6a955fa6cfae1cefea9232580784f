@@ -1,0 +1,14 @@
+src/main/java/com/meli/marketplace/dto/ProductoDTO.java
+  h_0e4c4fdeb84025 3-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "99d07a8a57a6a955fa6cfae1cefea9232580784f",
+  "prompts": {},
+  "humans": {
+    "h_0e4c4fdeb84025": {
+      "author": "shadowsouls444 <angel.acuna.meza@gmail.com>"
+    }
+  }
+}

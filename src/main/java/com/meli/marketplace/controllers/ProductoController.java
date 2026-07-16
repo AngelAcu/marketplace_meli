@@ -1,6 +1,7 @@
 package com.meli.marketplace.controllers;
 
-import com.meli.marketplace.dto.ProductoDTO;
+import com.meli.marketplace.dto.ProductoRequestDTO;
+import com.meli.marketplace.dto.ProductoResponseDTO;
 import com.meli.marketplace.services.ProductoService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
@@ -23,19 +24,19 @@ public class ProductoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductoDTO>> getAll(@RequestParam(required = false) String nombre,
-                                                    @PageableDefault(size = 10, page = 0, sort = "nombre") Pageable pageable) {
+    public ResponseEntity<List<ProductoResponseDTO>> getAll(@RequestParam(required = false) String nombre,
+                                                            @PageableDefault(size = 10, page = 0, sort = "nombre") Pageable pageable) {
         return ResponseEntity.ok(this.productoService.findAll(nombre, pageable));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductoDTO> findById(@PathVariable Long id){
+    public ResponseEntity<ProductoResponseDTO> findById(@PathVariable Long id){
         return ResponseEntity.ok(this.productoService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<ProductoDTO> save(@Valid @RequestBody ProductoDTO productoDto){
-        ProductoDTO productoSaved = this.productoService.save(productoDto);
+    public ResponseEntity<ProductoResponseDTO> save(@Valid @RequestBody ProductoRequestDTO productoRequestDto){
+        ProductoResponseDTO productoSaved = this.productoService.save(productoRequestDto);
         URI uri = URI.create("/api/productos/" + productoSaved.getId());
         return ResponseEntity.created(uri).body(productoSaved);
     }

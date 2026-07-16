@@ -1,6 +1,7 @@
 package com.meli.marketplace.services;
 
-import com.meli.marketplace.dto.ProductoDTO;
+import com.meli.marketplace.dto.ProductoRequestDTO;
+import com.meli.marketplace.dto.ProductoResponseDTO;
 import com.meli.marketplace.exceptions.ProductoConflictException;
 import com.meli.marketplace.exceptions.ProductoNotFoundException;
 import com.meli.marketplace.models.Producto;
@@ -22,7 +23,7 @@ public class ProductoService {
         this.productoRepository = productoRepository;
     }
 
-    public List<ProductoDTO> findAll(String nombre, Pageable pageable) {
+    public List<ProductoResponseDTO> findAll(String nombre, Pageable pageable) {
 
         Page<Producto> productos = null;
 
@@ -33,7 +34,7 @@ public class ProductoService {
         }
 
         return productos.stream()
-                .map(p -> new ProductoDTO(
+                .map(p -> new ProductoResponseDTO(
                         p.getId(),
                         p.getNombre(),
                         p.getDescripcion(),
@@ -43,26 +44,26 @@ public class ProductoService {
 
     }
 
-    public ProductoDTO findById(Long id){
+    public ProductoResponseDTO findById(Long id){
 
         Optional<Producto> productoOptional = this.productoRepository.findById(id);
 
         if (productoOptional.isPresent()){
             Producto producto = productoOptional.get();
 
-            return new ProductoDTO(producto.getId(), producto.getNombre(), producto.getDescripcion(), producto.getPrecio());
+            return new ProductoResponseDTO(producto.getId(), producto.getNombre(), producto.getDescripcion(), producto.getPrecio());
         }
 
         throw new ProductoNotFoundException(id);
 
     }
 
-    public ProductoDTO save(ProductoDTO productoDto){
+    public ProductoResponseDTO save(ProductoRequestDTO productoRequestDto){
 
         Producto producto = new Producto();
-        producto.setNombre(productoDto.getNombre());
-        producto.setDescripcion(productoDto.getDescripcion());
-        producto.setPrecio(productoDto.getPrecio());
+        producto.setNombre(productoRequestDto.getNombre());
+        producto.setDescripcion(productoRequestDto.getDescripcion());
+        producto.setPrecio(productoRequestDto.getPrecio());
 
         if (this.productoRepository.findByNombre(producto.getNombre()).isPresent()){
             throw  new ProductoConflictException(producto.getNombre());
@@ -70,7 +71,7 @@ public class ProductoService {
 
         Producto productoSaved = this.productoRepository.save(producto);
 
-        return new ProductoDTO(productoSaved.getId(), productoSaved.getNombre(), productoSaved.getDescripcion(), productoSaved.getPrecio());
+        return new ProductoResponseDTO(productoSaved.getId(), productoSaved.getNombre(), productoSaved.getDescripcion(), productoSaved.getPrecio());
 
     }
 

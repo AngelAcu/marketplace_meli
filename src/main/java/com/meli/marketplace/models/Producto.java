@@ -14,6 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 //Model Producto
 @Data
 @AllArgsConstructor
@@ -29,7 +31,7 @@ public class Producto {
     @Column(nullable = false)
     private String nombre;
     private String descripcion;
-    private double precio;
+    private BigDecimal precio;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id")

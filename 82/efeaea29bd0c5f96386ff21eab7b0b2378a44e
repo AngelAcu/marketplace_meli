@@ -1,0 +1,16 @@
+src/main/java/com/meli/marketplace/mappers/ProductoMapper.java
+  h_0e4c4fdeb84025 1-15
+src/main/java/com/meli/marketplace/services/ProductoService.java
+  h_0e4c4fdeb84025 7,22,24,26,40,52,72
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "82efeaea29bd0c5f96386ff21eab7b0b2378a44e",
+  "prompts": {},
+  "humans": {
+    "h_0e4c4fdeb84025": {
+      "author": "shadowsouls444 <angel.acuna.meza@gmail.com>"
+    }
+  }
+}

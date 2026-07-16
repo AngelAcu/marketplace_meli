@@ -1,0 +1,18 @@
+src/main/java/com/meli/marketplace/models/Producto.java
+  h_0e4c4fdeb84025 17-18,34
+src/main/java/com/meli/marketplace/controllers/ProductoController.java
+  h_0e4c4fdeb84025 3-4,27,33,38-39
+src/main/java/com/meli/marketplace/services/ProductoService.java
+  h_0e4c4fdeb84025 3-4,26,37,47,54,61,64-66,74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "76c00eb73cbffb4e25bd659ec5df1cee2e719352",
+  "prompts": {},
+  "humans": {
+    "h_0e4c4fdeb84025": {
+      "author": "shadowsouls444 <angel.acuna.meza@gmail.com>"
+    }
+  }
+}

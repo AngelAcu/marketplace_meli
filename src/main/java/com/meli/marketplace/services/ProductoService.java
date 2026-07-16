@@ -4,6 +4,7 @@ import com.meli.marketplace.dto.ProductoRequestDTO;
 import com.meli.marketplace.dto.ProductoResponseDTO;
 import com.meli.marketplace.exceptions.ProductoConflictException;
 import com.meli.marketplace.exceptions.ProductoNotFoundException;
+import com.meli.marketplace.mappers.ProductoMapper;
 import com.meli.marketplace.models.Producto;
 import com.meli.marketplace.repositories.ProductoRepository;
 import org.springframework.data.domain.Page;
@@ -18,9 +19,11 @@ import java.util.Optional;
 public class ProductoService {
 
     private final ProductoRepository productoRepository;
+    private final ProductoMapper productoMapper;
 
-    public ProductoService(ProductoRepository productoRepository) {
+    public ProductoService(ProductoRepository productoRepository, ProductoMapper productoMapper) {
         this.productoRepository = productoRepository;
+        this.productoMapper = productoMapper;
     }
 
     public List<ProductoResponseDTO> findAll(String nombre, Pageable pageable) {
@@ -34,12 +37,7 @@ public class ProductoService {
         }
 
         return productos.stream()
-                .map(p -> new ProductoResponseDTO(
-                        p.getId(),
-                        p.getNombre(),
-                        p.getDescripcion(),
-                        p.getPrecio()
-                ))
+                .map(p -> productoMapper.toDto(p))
                 .toList();
 
     }
@@ -51,7 +49,7 @@ public class ProductoService {
         if (productoOptional.isPresent()){
             Producto producto = productoOptional.get();
 
-            return new ProductoResponseDTO(producto.getId(), producto.getNombre(), producto.getDescripcion(), producto.getPrecio());
+            return productoMapper.toDto(producto);
         }
 
         throw new ProductoNotFoundException(id);
@@ -71,7 +69,7 @@ public class ProductoService {
 
         Producto productoSaved = this.productoRepository.save(producto);
 
-        return new ProductoResponseDTO(productoSaved.getId(), productoSaved.getNombre(), productoSaved.getDescripcion(), productoSaved.getPrecio());
+        return productoMapper.toDto(productoSaved);
 
     }
 

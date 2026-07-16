@@ -28,7 +28,7 @@ public class ProductoService {
         Page<Producto> productos = null;
 
         if (nombre != null){
-            productos = this.productoRepository.findByNombre(nombre, pageable);
+            productos = this.productoRepository.findByNombreContainingIgnoreCase(nombre, pageable);
         } else {
             productos = this.productoRepository.findAll(pageable);
         }
@@ -65,7 +65,7 @@ public class ProductoService {
         producto.setDescripcion(productoRequestDto.getDescripcion());
         producto.setPrecio(productoRequestDto.getPrecio());
 
-        if (this.productoRepository.findByNombre(producto.getNombre()).isPresent()){
+        if (this.productoRepository.findByNombreIgnoreCase(producto.getNombre()).isPresent()){
             throw  new ProductoConflictException(producto.getNombre());
         }
 

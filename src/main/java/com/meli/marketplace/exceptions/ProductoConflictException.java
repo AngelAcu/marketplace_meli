@@ -7,4 +7,8 @@ public class ProductoConflictException extends RuntimeException {
         super("El nombre " + nombre + " ya se esta usando en un producto existente");
     }
 
+    public ProductoConflictException(String nombre, Throwable cause) {
+        super("El nombre " + nombre + " ya se esta usando en un producto existente", cause);
+    }
+
 }

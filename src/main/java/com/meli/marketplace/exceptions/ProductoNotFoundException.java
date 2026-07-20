@@ -7,4 +7,8 @@ public class ProductoNotFoundException extends  RuntimeException{
         super("Producto " + id + " no encontrado");
     }
 
+    public ProductoNotFoundException(Long id, Throwable cause){
+        super("Producto " + id + " no encontrado", cause);
+    }
+
 }

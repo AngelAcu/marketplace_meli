@@ -12,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 // ProductoService
 @Service
@@ -37,22 +36,16 @@ public class ProductoService {
         }
 
         return productos.stream()
-                .map(p -> productoMapper.toDto(p))
+                .map(p -> this.productoMapper.toDto(p))
                 .toList();
 
     }
 
     public ProductoResponseDTO findById(Long id){
 
-        Optional<Producto> productoOptional = this.productoRepository.findById(id);
-
-        if (productoOptional.isPresent()){
-            Producto producto = productoOptional.get();
-
-            return productoMapper.toDto(producto);
-        }
-
-        throw new ProductoNotFoundException(id);
+        return this.productoRepository.findById(id)
+                .map(p -> this.productoMapper.toDto(p))
+                .orElseThrow(() -> new ProductoNotFoundException(id));
 
     }
 
@@ -69,7 +62,7 @@ public class ProductoService {
 
         Producto productoSaved = this.productoRepository.save(producto);
 
-        return productoMapper.toDto(productoSaved);
+        return this.productoMapper.toDto(productoSaved);
 
     }
 

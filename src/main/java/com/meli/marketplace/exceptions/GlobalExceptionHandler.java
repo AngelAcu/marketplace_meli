@@ -2,6 +2,7 @@ package com.meli.marketplace.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -25,8 +26,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleArgumentNotValid (MethodArgumentNotValidException ex) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
+        List<String> errores = ex.getBindingResult().getFieldErrors().stream()
+                .map(FieldError::getDefaultMessage)
+                .toList();
+
         return ResponseEntity.status(status)
-                .body(new ErrorResponse(status.value(), "Bad request", ex.getBindingResult().getFieldError().getDefaultMessage(), LocalDateTime.now(), List.of()));
+                .body(new ErrorResponse(status.value(), "Bad request", "Argumentos no validos", LocalDateTime.now(), errores));
     }
 
     @ExceptionHandler(ProductoConflictException.class)

@@ -41,4 +41,18 @@ public class ProductoController {
         return ResponseEntity.created(uri).body(productoSaved);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductoResponseDTO> update(@PathVariable Long id,
+                                                      @Valid @RequestBody ProductoRequestDTO productoRequestDTO){
+        ProductoResponseDTO productoUpdated = this.productoService.update(id, productoRequestDTO);
+        URI uri = URI.create("/api/productos/" + productoUpdated.getId());
+        return ResponseEntity.created(uri).body(productoUpdated);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        this.productoService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

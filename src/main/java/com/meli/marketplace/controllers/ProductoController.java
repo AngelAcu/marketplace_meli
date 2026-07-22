@@ -37,7 +37,7 @@ public class ProductoController {
     @PostMapping
     public ResponseEntity<ProductoResponseDTO> save(@Valid @RequestBody ProductoRequestDTO productoRequestDto){
         ProductoResponseDTO productoSaved = this.productoService.save(productoRequestDto);
-        URI uri = URI.create("/api/productos/" + productoSaved.getId());
+        URI uri = URI.create("/api/productos/" + productoSaved.id());
         return ResponseEntity.created(uri).body(productoSaved);
     }
 
@@ -45,7 +45,7 @@ public class ProductoController {
     public ResponseEntity<ProductoResponseDTO> update(@PathVariable Long id,
                                                       @Valid @RequestBody ProductoRequestDTO productoRequestDTO){
         ProductoResponseDTO productoUpdated = this.productoService.update(id, productoRequestDTO);
-        URI uri = URI.create("/api/productos/" + productoUpdated.getId());
+        URI uri = URI.create("/api/productos/" + productoUpdated.id());
         return ResponseEntity.created(uri).body(productoUpdated);
     }
 

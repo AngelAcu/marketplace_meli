@@ -53,14 +53,14 @@ public class ProductoService {
     @Transactional
     public ProductoResponseDTO save(ProductoRequestDTO productoRequestDto){
 
-        if (this.productoRepository.findByNombreIgnoreCase(productoRequestDto.getNombre()).isPresent()){
-            throw  new ProductoConflictException(productoRequestDto.getNombre());
+        if (this.productoRepository.findByNombreIgnoreCase(productoRequestDto.nombre()).isPresent()){
+            throw  new ProductoConflictException(productoRequestDto.nombre());
         }
 
         Producto producto = new Producto();
-        producto.setNombre(productoRequestDto.getNombre());
-        producto.setDescripcion(productoRequestDto.getDescripcion());
-        producto.setPrecio(productoRequestDto.getPrecio());
+        producto.setNombre(productoRequestDto.nombre());
+        producto.setDescripcion(productoRequestDto.descripcion());
+        producto.setPrecio(productoRequestDto.precio());
 
         Producto productoSaved = this.productoRepository.save(producto);
 
@@ -73,13 +73,13 @@ public class ProductoService {
 
         Producto producto = this.productoRepository.findById(id).orElseThrow(() -> new ProductoNotFoundException(id));
 
-        if (this.productoRepository.findByNombreIgnoreCase(productoRequestDto.getNombre()).isPresent()){
-            throw  new ProductoConflictException(productoRequestDto.getNombre());
+        if (this.productoRepository.findByNombreIgnoreCase(productoRequestDto.nombre()).isPresent()){
+            throw  new ProductoConflictException(productoRequestDto.nombre());
         }
 
-        producto.setNombre(productoRequestDto.getNombre());
-        producto.setDescripcion(productoRequestDto.getDescripcion());
-        producto.setPrecio(productoRequestDto.getPrecio());
+        producto.setNombre(productoRequestDto.nombre());
+        producto.setDescripcion(productoRequestDto.descripcion());
+        producto.setPrecio(productoRequestDto.precio());
 
         Producto productoUpdated = this.productoRepository.save(producto);
 

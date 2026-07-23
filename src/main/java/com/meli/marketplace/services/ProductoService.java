@@ -26,8 +26,18 @@ public class ProductoService {
         this.productoMapper = productoMapper;
     }
 
-    public List<ProductoResponseDTO> findAll(String nombre, Pageable pageable) {
+    private Producto findById(Long id){
+        return this.productoRepository.findById(id)
+                .orElseThrow(() -> new ProductoNotFoundException(id));
+    }
 
+    private void findByNombre(String nombre){
+        if (this.productoRepository.findByNombreIgnoreCase(nombre).isPresent()){
+            throw  new ProductoConflictException(nombre);
+        }
+    }
+
+    public List<ProductoResponseDTO> findAll(String nombre, Pageable pageable) {
         Page<Producto> productos = null;
 
         if (nombre != null){
@@ -39,60 +49,38 @@ public class ProductoService {
         return productos.stream()
                 .map(p -> this.productoMapper.toDto(p))
                 .toList();
-
     }
 
-    public ProductoResponseDTO findById(Long id){
-
-        return this.productoRepository.findById(id)
-                .map(p -> this.productoMapper.toDto(p))
-                .orElseThrow(() -> new ProductoNotFoundException(id));
-
+    public ProductoResponseDTO getById(Long id){
+        Producto producto = this.findById(id);
+        return this.productoMapper.toDto(producto);
     }
 
     @Transactional
     public ProductoResponseDTO save(ProductoRequestDTO productoRequestDto){
+        this.findByNombre(productoRequestDto.nombre());
 
-        if (this.productoRepository.findByNombreIgnoreCase(productoRequestDto.nombre()).isPresent()){
-            throw  new ProductoConflictException(productoRequestDto.nombre());
-        }
-
-        Producto producto = new Producto();
-        producto.setNombre(productoRequestDto.nombre());
-        producto.setDescripcion(productoRequestDto.descripcion());
-        producto.setPrecio(productoRequestDto.precio());
-
+        Producto producto = productoMapper.toEntity(productoRequestDto);
         Producto productoSaved = this.productoRepository.save(producto);
 
         return this.productoMapper.toDto(productoSaved);
-
     }
 
     @Transactional
     public ProductoResponseDTO update(Long id, ProductoRequestDTO productoRequestDto){
+        Producto producto = this.findById(id);
+        this.findByNombre(productoRequestDto.nombre());
 
-        Producto producto = this.productoRepository.findById(id).orElseThrow(() -> new ProductoNotFoundException(id));
+        Producto productoUpdated = this.productoMapper.updateEntity(producto, productoRequestDto);
+        Producto productoSaved = this.productoRepository.save(productoUpdated);
 
-        if (this.productoRepository.findByNombreIgnoreCase(productoRequestDto.nombre()).isPresent()){
-            throw  new ProductoConflictException(productoRequestDto.nombre());
-        }
-
-        producto.setNombre(productoRequestDto.nombre());
-        producto.setDescripcion(productoRequestDto.descripcion());
-        producto.setPrecio(productoRequestDto.precio());
-
-        Producto productoUpdated = this.productoRepository.save(producto);
-
-        return this.productoMapper.toDto(productoUpdated);
-
+        return this.productoMapper.toDto(productoSaved);
     }
 
     @Transactional
     public void delete(Long id){
-
-        Producto producto = this.productoRepository.findById(id).orElseThrow(() -> new ProductoNotFoundException(id));
+        Producto producto = this.findById(id);
         this.productoRepository.delete(producto);
-
     }
 
 }

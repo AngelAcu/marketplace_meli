@@ -24,14 +24,13 @@ public class ProductoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductoResponseDTO>> getAll(@RequestParam(required = false) String nombre,
-                                                            @PageableDefault(size = 10, page = 0, sort = "nombre") Pageable pageable) {
+    public ResponseEntity<List<ProductoResponseDTO>> getAll(@RequestParam(required = false) String nombre, @PageableDefault(size = 10, page = 0, sort = "nombre") Pageable pageable) {
         return ResponseEntity.ok(this.productoService.findAll(nombre, pageable));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductoResponseDTO> findById(@PathVariable Long id){
-        return ResponseEntity.ok(this.productoService.findById(id));
+        return ResponseEntity.ok(this.productoService.getById(id));
     }
 
     @PostMapping
@@ -42,8 +41,7 @@ public class ProductoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductoResponseDTO> update(@PathVariable Long id,
-                                                      @Valid @RequestBody ProductoRequestDTO productoRequestDTO){
+    public ResponseEntity<ProductoResponseDTO> update(@PathVariable Long id, @Valid @RequestBody ProductoRequestDTO productoRequestDTO){
         ProductoResponseDTO productoUpdated = this.productoService.update(id, productoRequestDTO);
         URI uri = URI.create("/api/productos/" + productoUpdated.id());
         return ResponseEntity.created(uri).body(productoUpdated);

@@ -5,7 +5,7 @@ Aplicación backend para la gestión de productos en un marketplace, desarrollad
 Asegurate de tener Docker instalado. Luego ejecuta el siguiente comando en la raíz del proyecto: **docker-compose up**
 
 ## DOCUMENTACION DE ENDPOINTS
-Una vez levantado el servidor, accedé a la documentación interactiva en:: **http://localhost:8080/swagger-ui/index.html**
+Una vez levantado el servidor, accede a la documentacion en: **http://localhost:8080/swagger-ui/index.html**
 
 ## ARQUITECTURA
 El proyecto sigue una arquitectura en capas:

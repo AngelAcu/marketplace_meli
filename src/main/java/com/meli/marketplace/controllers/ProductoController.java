@@ -15,7 +15,7 @@ import java.util.List;
 //Producto Controller
 @RestController
 @RequestMapping("/api/productos")
-public class ProductoController {
+public class ProductoController implements ProductoApi {
 
     private final ProductoService productoService;
 
@@ -23,16 +23,19 @@ public class ProductoController {
         this.productoService = productoService;
     }
 
+    @Override
     @GetMapping
     public ResponseEntity<List<ProductoResponseDTO>> getAll(@RequestParam(required = false) String nombre, @PageableDefault(size = 10, page = 0, sort = "nombre") Pageable pageable) {
         return ResponseEntity.ok(this.productoService.findAll(nombre, pageable));
     }
 
+    @Override
     @GetMapping("/{id}")
     public ResponseEntity<ProductoResponseDTO> findById(@PathVariable Long id){
         return ResponseEntity.ok(this.productoService.getById(id));
     }
 
+    @Override
     @PostMapping
     public ResponseEntity<ProductoResponseDTO> save(@Valid @RequestBody ProductoRequestDTO productoRequestDto){
         ProductoResponseDTO productoSaved = this.productoService.save(productoRequestDto);
@@ -40,6 +43,7 @@ public class ProductoController {
         return ResponseEntity.created(uri).body(productoSaved);
     }
 
+    @Override
     @PutMapping("/{id}")
     public ResponseEntity<ProductoResponseDTO> update(@PathVariable Long id, @Valid @RequestBody ProductoRequestDTO productoRequestDTO){
         ProductoResponseDTO productoUpdated = this.productoService.update(id, productoRequestDTO);
@@ -47,6 +51,7 @@ public class ProductoController {
         return ResponseEntity.created(uri).body(productoUpdated);
     }
 
+    @Override
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         this.productoService.delete(id);
